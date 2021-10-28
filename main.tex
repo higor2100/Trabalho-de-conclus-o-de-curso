@@ -1,0 +1,660 @@
+%% abtex2-modelo-trabalho-academico.tex, v-1.9.2 laurocesar
+%% Copyright 2012-2014 by abnTeX2 group at http://abntex2.googlecode.com/ 
+%%
+%% This work may be distributed and/or modified under the
+%% conditions of the LaTeX Project Public License, either version 1.3
+%% of this license or (at your option) any later version.
+%% The latest version of this license is in
+%%   http://www.latex-project.org/lppl.txt
+%% and version 1.3 or later is part of all distributions of LaTeX
+%% version 2005/12/01 or later.
+%%
+%% This work has the LPPL maintenance status `maintained'.
+%% 
+%% The Current Maintainer of this work is the abnTeX2 team, led
+%% by Lauro César Araujo. Further information are available on 
+%% http://abntex2.googlecode.com/
+%%
+%% This work consists of the files abntex2-modelo-trabalho-academico.tex,
+%% abntex2-modelo-include-comandos and abntex2-modelo-references.bib
+%%
+
+% ------------------------------------------------------------------------
+% ------------------------------------------------------------------------
+% abnTeX2: Modelo de Trabalho Academico (tese de doutorado, dissertacao de
+% mestrado e trabalhos monograficos em geral) em conformidade com 
+% ABNT NBR 14724:2011: Informacao e documentacao - Trabalhos academicos -
+% Apresentacao
+% ------------------------------------------------------------------------
+% ------------------------------------------------------------------------
+
+\documentclass[
+	% -- opções da classe memoir --
+	12pt,				% tamanho da fonte
+	openright,			% capítulos começam em pág ímpar (insere página vazia caso preciso)
+	twoside,			% para impressão em verso e anverso. Oposto a oneside
+	a4paper,			% tamanho do papel. 
+	% -- opções da classe abntex2 --
+	%chapter=TITLE,		% títulos de capítulos convertidos em letras maiúsculas
+	%section=TITLE,		% títulos de seções convertidos em letras maiúsculas
+	%subsection=TITLE,	% títulos de subseções convertidos em letras maiúsculas
+	%subsubsection=TITLE,% títulos de subsubseções convertidos em letras maiúsculas
+	% -- opções do pacote babel --
+	english,			% idioma adicional para hifenização
+	french,				% idioma adicional para hifenização
+	spanish,			% idioma adicional para hifenização
+	brazil				% o último idioma é o principal do documento
+	]{abntex2}
+
+% ---
+% Pacotes básicos 
+% ---
+\usepackage{lmodern}			% Usa a fonte Latin Modern			
+\usepackage[T1]{fontenc}		% Selecao de codigos de fonte.
+\usepackage[utf8]{inputenc}		% Codificacao do documento (conversão automática dos acentos)
+\usepackage{lastpage}			% Usado pela Ficha catalográfica
+\usepackage{indentfirst}		% Indenta o primeiro parágrafo de cada seção.
+\usepackage{color}				% Controle das cores
+\usepackage{graphicx}			% Inclusão de gráficos
+\usepackage{microtype} 			% para melhorias de justificação
+% ---
+		
+% ---
+% Pacotes adicionais, usados apenas no âmbito do Modelo Canônico do abnteX2
+% ---
+\usepackage{lipsum}				% para geração de dummy text
+% ---
+
+% ---
+% Pacotes de citações
+% ---
+\usepackage[brazilian,hyperpageref]{backref}	 % Paginas com as citações na bibl
+\usepackage[alf]{abntex2cite}	% Citações padrão ABNT
+
+% --- 
+% CONFIGURAÇÕES DE PACOTES
+% --- 
+
+% ---
+% Configurações do pacote backref
+% Usado sem a opção hyperpageref de backref
+\renewcommand{\backrefpagesname}{Citado na(s) página(s):~}
+% Texto padrão antes do número das páginas
+\renewcommand{\backref}{}
+% Define os textos da citação
+\renewcommand*{\backrefalt}[4]{
+	\ifcase #1 %
+		Nenhuma citação no texto.%
+	\or
+		Citado na página #2.%
+	\else
+		Citado #1 vezes nas páginas #2.%
+	\fi}%
+% ---
+
+% ---
+% Informações de dados para CAPA e FOLHA DE ROSTO
+% ---
+\titulo{Título de nosso TCC}
+\autor{Higor Viana de Morais\and Josué Batista Matos Deschamps de Melo}
+\local{São Paulo}
+\data{2021}
+\orientador{Clarice Gameiro da Fonseca Pachi}
+\coorientador{Jorge Futoshi Yamamoto}
+\instituicao{%
+  Centro Universitário Senac - Santo Amaro
+  \par
+  Bacharelado em Ciência da Computação}
+\tipotrabalho{Tese (Doutorado)}
+% O preambulo deve conter o tipo do trabalho, o objetivo, 
+% o nome da instituição e a área de concentração 
+\preambulo{Monografia apresentada na disciplina Trabalho de Conclusão de Curso, como parte dosrequisitos para obtenção do título de Bacharelem Ciência da Computação}
+% ---
+
+
+% ---
+% Configurações de aparência do PDF final
+
+% alterando o aspecto da cor azul
+\definecolor{blue}{RGB}{41,5,195}
+
+
+% --- 
+
+% --- 
+% Espaçamentos entre linhas e parágrafos 
+% --- 
+
+% O tamanho do parágrafo é dado por:
+\setlength{\parindent}{1.3cm}
+
+% Controle do espaçamento entre um parágrafo e outro:
+\setlength{\parskip}{0.2cm}  % tente também \onelineskip
+
+% ---
+% compila o indice
+% ---
+\makeindex
+% ---
+
+% ----
+% Início do documento
+% ----
+\begin{document}
+
+% Retira espaço extra obsoleto entre as frases.
+\frenchspacing 
+
+% ----------------------------------------------------------
+% ELEMENTOS PRÉ-TEXTUAIS
+% ----------------------------------------------------------
+% \pretextual
+
+% ---
+% Capa
+% ---
+\imprimircapa
+% ---
+
+% ---
+% Folha de rosto
+% (o * indica que haverá a ficha bibliográfica)
+% ---
+\imprimirfolhaderosto*
+% ---
+
+% ---
+% Inserir a ficha bibliografica
+% ---
+
+% Isto é um exemplo de Ficha Catalográfica, ou ``Dados internacionais de
+% catalogação-na-publicação''. Você pode utilizar este modelo como referência. 
+% Porém, provavelmente a biblioteca da sua universidade lhe fornecerá um PDF
+% com a ficha catalográfica definitiva após a defesa do trabalho. Quando estiver
+% com o documento, salve-o como PDF no diretório do seu projeto e substitua todo
+% o conteúdo de implementação deste arquivo pelo comando abaixo:
+%
+% \begin{fichacatalografica}
+%     \includepdf{fig_ficha_catalografica.pdf}
+% \end{fichacatalografica}
+
+
+% ---
+% Inserir errata
+% ---
+%\begin{errata}
+%Elemento opcional da %\citeonline[4.2.1.2]{NBR14724:2011}. Exemplo:
+
+%\vspace{\onelineskip}
+
+%FERRIGNO, C. R. A. \textbf{Tratamento de %neoplasias ósseas apendiculares com
+%reimplantação de enxerto ósseo autólogo %autoclavado associado ao plasma
+%rico em plaquetas}: estudo crítico na cirurgia de %preservação de membro em
+%cães. 2011. 128 f. Tese (Livre-Docência) - %Faculdade de Medicina Veterinária e
+%Zootecnia, Universidade de São Paulo, São Paulo, %2011.
+
+%\begin{table}[htb]
+%\center
+%\footnotesize
+%\begin{tabular}{|p{1.4cm}|p{1cm}|p{3cm}|p{3cm}|}
+%  \hline
+%   \textbf{Folha} & \textbf{Linha}  & \textbf{Onde se lê}  & \textbf{Leia-se}  \\
+%    \hline
+%    1 & 10 & auto-conclavo & autoconclavo\\
+%   \hline
+%\end{tabular}
+%\end{table}
+
+%\end{errata}
+% ---
+
+% ---
+% Inserir folha de aprovação
+% ---
+
+% Isto é um exemplo de Folha de aprovação, elemento obrigatório da NBR
+% 14724/2011 (seção 4.2.1.3). Você pode utilizar este modelo até a aprovação
+% do trabalho. Após isso, substitua todo o conteúdo deste arquivo por uma
+% imagem da página assinada pela banca com o comando abaixo:
+%
+% \includepdf{folhadeaprovacao_final.pdf}
+%
+\begin{folhadeaprovacao}
+
+  \begin{center}
+    {\ABNTEXchapterfont\large\imprimirautor}
+
+    \vspace*{\fill}\vspace*{\fill}
+    \begin{center}
+      \ABNTEXchapterfont\bfseries\Large\imprimirtitulo
+    \end{center}
+    \vspace*{\fill}
+    
+    \hspace{.45\textwidth}
+    \begin{minipage}{.5\textwidth}
+        \imprimirpreambulo
+    \end{minipage}%
+    \vspace*{\fill}
+   \end{center}
+        
+   Trabalho xx. \imprimirlocal, xx de dezembro de 2021:
+
+   \assinatura{\textbf{\imprimirorientador} \\ Orientador} 
+   \assinatura{\textbf{Professor} \\ Convidado 1}
+   \assinatura{\textbf{Professor} \\ Convidado 2}
+   %\assinatura{\textbf{Professor} \\ Convidado 3}
+   %\assinatura{\textbf{Professor} \\ Convidado 4}
+      
+   \begin{center}
+    \vspace*{0.5cm}
+    {\large\imprimirlocal}
+    \par
+    {\large\imprimirdata}
+    \vspace*{1cm}
+  \end{center}
+  
+\end{folhadeaprovacao}
+% ---
+
+% ---
+% Dedicatória
+% ---
+\begin{dedicatoria}
+   \vspace*{\fill}
+   \centering
+   \noindent
+   \textit{ Este trabalho é dedicado à.} \vspace*{\fill}
+\end{dedicatoria}
+% ---
+
+% ---
+% Agradecimentos
+% ---
+\begin{agradecimentos}
+Os agradecimentos principais são direcionados à Gerald Weber, Miguel Frasson,
+Leslie H. Watter, Bruno Parente Lima, Flávio de Vasconcellos Corrêa, Otavio Real
+Salvador, Renato Machnievscz\footnote{Os nomes dos integrantes do primeiro
+projeto abn\TeX\ foram extraídos de
+\url{http://codigolivre.org.br/projects/abntex/}} e todos aqueles que
+contribuíram para que a produção de trabalhos acadêmicos conforme
+as normas ABNT com \LaTeX\ fosse possível.
+
+Agradecimentos especiais são direcionados ao Centro de Pesquisa em Arquitetura
+da Informação\footnote{\url{http://www.cpai.unb.br/}} da Universidade de
+Brasília (CPAI), ao grupo de usuários
+\emph{latex-br}\footnote{\url{http://groups.google.com/group/latex-br}} e aos
+novos voluntários do grupo
+\emph{\abnTeX}\footnote{\url{http://groups.google.com/group/abntex2} e
+\url{http://abntex2.googlecode.com/}}~que contribuíram e que ainda
+contribuirão para a evolução do \abnTeX.
+
+\end{agradecimentos}
+% ---
+
+% ---
+% Epígrafe
+% ---
+\begin{epigrafe}
+    \vspace*{\fill}
+	\begin{flushright}
+		\textit{``Não vos amoldeis às estruturas deste mundo, \\
+		mas transformai-vos pela renovação da mente, \\
+		a fim de distinguir qual é a vontade de Deus: \\
+		o que é bom, o que Lhe é agradável, o que é perfeito.\\
+		(Bíblia Sagrada, Romanos 12, 2)}
+	\end{flushright}
+\end{epigrafe}
+% ---
+
+% ---
+% RESUMOS
+% ---
+
+% resumo em português
+\setlength{\absparsep}{18pt} % ajusta o espaçamento dos parágrafos do resumo
+\begin{resumo}
+Ao abordar conceitos matemáticos e computacionais é possível analisar a transmissão de dados na rede de computadores de um complexo como o Hospital das Clínicas da Faculdade
+de Medicina da Universidade de São Paulo (HCFMUSP).
+
+Ao investigar o fluxo de dados na rede de computadores do HCFMUSP será viável explorar, principalmente, o tráfego de imagens médicas, considerando todas as conexões com os equipamentos que permitem o fluxo os dados.
+
+O objetivo é examinar os modelos matemáticos que melhor representem as séries temporais geradas pelo tráfego na rede e, por meio do uso da linguagem Python uma das ferramentas computacionais associadas, gerar gráficos e fazer predições úteis para melhorar o fluxo de dados em um complexo hospitalar.
+
+ \textbf{Palavras-chaves}: Séries Temporais, Rede de Computadores, Imagens Médicas, Python.
+\end{resumo}
+
+% resumo em inglês
+\begin{resumo}[Abstract]
+ \begin{otherlanguage*}{english}
+In this work, we study mathematical and computational concepts to understand and analyze data transmission in the network of the Hospital das Clínicas complex of the Faculty of Medicine of the University of São Paulo (HCFMUSP).
+
+Studying the data flow within the HCFMUSP computer network we investigate, mainly, the traffic of medical images, considering all the connections with the equipment that support the data flow.
+
+Our objective is to study the mathematical models that adequately represent the time series generated by traffic in this network and, through Python language and other associated computational tools, generate graphs and make useful predictions better understand the data flow in this hospital complex.
+
+   \vspace{\onelineskip}
+ 
+   \noindent 
+   \textbf{Key-words}: Time Series, Computer Network, Medical Images, Python.
+ \end{otherlanguage*}
+\end{resumo}
+
+% ---
+
+% ---
+% inserir lista de ilustrações
+% ---
+\pdfbookmark[0]{\listfigurename}{lof}
+
+\listoffigures*
+\cleardoublepage
+% ---
+
+% ---
+% inserir lista de tabelas
+% ---
+\pdfbookmark[0]{\listtablename}{lot}
+\listoftables*
+\cleardoublepage
+% ---
+
+% ---
+% inserir lista de abreviaturas e siglas
+% ---
+\begin{siglas}
+  \item[ARIMA] Auto Regressive Integrated Moving Average
+\item[AR] Auto Regressão
+\item[ACR] American College of Radiology
+\item[DICOM] Digital Imaging and Communications in Medicine
+\item[ed.] Edição
+\item[HC] Hospital das Clínicas
+\item[HCFMUSP] Hospital das Clínicas Faculdade de Medicina da Universidade de São Paulo
+\item[HTTP] Hypertext Transfer Protocol 
+\item[IP] Internet Protocol
+\item[NEMA] National Electrical Manufacturers Association
+\item[MM] Médias Moveis
+\item[MBS] Medicare Benefits Program
+\item[NETI] Núcleo Especializado de Tecnologia da Informação
+\item[NETI – HCFMUSP] Núcleo Especializado de Tecnologia da Informação Hospital das Clínicas da Faculdade de Medicina da Universidade de São Paulo
+\item[OSI] Open System Interconnection
+\item[PACS] Picture Archiving and Communication System
+\item[RPA] Robotic Process Automation
+\item[SARIMA] Modelo Autorregressivo Integrado de Média Móvel Sazonal
+\item[SFlow] Sample Flow
+\item[TCP] Transmission Control Protocol
+\end{siglas}
+% ---
+
+% ---
+% inserir lista de símbolos
+% ---
+\begin{simbolos}
+  \item[$ \Gamma $] Letra grega Gama
+  \item[$ \Lambda $] Lambda
+  \item[$ \zeta $] Letra grega minúscula zeta
+  \item[$ \in $] Pertence
+\end{simbolos}
+% ---
+
+% ---
+% inserir o sumario
+% ---
+\pdfbookmark[0]{\contentsname}{toc}
+\tableofcontents*
+\cleardoublepage
+% ---
+
+
+
+% ----------------------------------------------------------
+% ELEMENTOS TEXTUAIS
+% ----------------------------------------------------------
+\textual
+
+% ----------------------------------------------------------
+% Introdução (exemplo de capítulo sem numeração, mas presente no Sumário)
+% ----------------------------------------------------------
+\chapter*[Introdução]{Introdução}
+\addcontentsline{toc}{chapter}{Introdução}
+% ----------------------------------------------------------
+
+Com o grande volume de dados disponíveis no tráfego da internet, é necessário cada vez mais a coleta e a análise contínua de bilhões de dados. A mineração desses dados tem requisitado modernas e eficazes infraestruturas distribuídas que possam suportar o processamento desses \emph{Big Data} (BARROSO%% HÖLZLE, 2009).
+
+A evolução das tecnologias de transmissão permitiu que as redes de computadores troquem informações em larga escala e com velocidade compatível com as necessidades de uma sociedade da informação e da comunicação de dados. Dessa forma, as questões relacionadas a infraestrutura ganharam destaque e passaram a interessar aos gestores de diversas áreas (COMER, 2007).
+
+As redes de computadores permitem enviar informações como imagens, sons, vídeos e muitos tipos de arquivos. Essa transmissão pode ser usada para vários fins, incluindo a transmissão de imagens médicas, usando tecnologias específicas como o \emph{DICOM (Digital Imaging and Communications in Medicine)} e o \emph{PACS (Picture Archiving and Communication System)} entre outras.
+
+É exploradas as características dos dados relacionados as imagens médicas que são obtidas e armazenadas no \emph{PACS} e transmitidas pela rede \emph{TCP/IP} existente em grandes complexos, obedecendo ao protocolo denominado \emph{DICOM}.
+
+As imagens médicas têm como objetivo permitir que os profissionais de saúde visualizem o corpo humano internamente e de forma não invasiva, a fim de tornar o diagnóstico mais preciso. A tecnologia de raio X existe desde o início do século XIX e a imagem médica 
+tridimensional apareceu em 1972 com a invenção da tomografia computadorizada (YOO, 2004).
+
+Há protocolos que permitem a integração entre diferentes sistemas de obtenção de imagens médicas e o mais conhecido é o \emph{HL7 (Health Level 7)}, que permite a troca de informações entre o sistema de informações de pacientes e o DICOM, material de estudo desse trabalho (PIANYKH, 2012).
+
+%%NAO APAGAR AINDA
+%%\abnTeX\ é apresentada em \citeonline{abntex2classe}.
+%%\url{http://abntex2.googlecode.com/}. Também fique livre para %%\LaTeX\ Project Public
+%%License''\footnote{\url{http://www.latex-project.org/lppl.txt}}.
+%%NAO APAGAR AINDA
+
+% ----------------------------------------------------------
+% PARTE
+% ----------------------------------------------------------
+\part{Preparação da pesquisa}
+% ----------------------------------------------------------
+
+% ---
+% Capitulo com exemplos de comandos inseridos de arquivo externo 
+% ---
+\include{abntex2-modelo-include-comandos}
+% ---
+
+% ----------------------------------------------------------
+% PARTE
+% ----------------------------------------------------------
+\part{Referenciais teóricos}
+% ----------------------------------------------------------
+
+% ---
+% Capitulo de revisão de literatura
+% ---
+\chapter{Lectus lobortis condimentum}
+% ---
+
+% ---
+\section{Vestibulum ante ipsum primis in faucibus orci luctus et ultrices
+posuere cubilia Curae}
+
+O corpo humano é complexo para a compreensão, por isso que para estudá-lo são usadas as imagens médicas que são formas de obter e revelar dados de forma simples para humanos. Essas imagens estão sempre relacionadas a qualquer tipo de interação de um determinado tipo de energia (eletromagnética, mecânica) com a matéria. A imagem é visualizada por meio de um parâmetro de contraste, determinado por algumas propriedades físicas que distinguem diferentes tecidos, órgãos ou sistemas. Com exceção do ultrassom, que usa energia e mecânica, a maioria das imagens médicas tem uma interação entre a energia eletromagnética e o corpo humano (SILVA; PATROCÍNIO; SCHIABEL, 2019).
+
+Várias evoluções ocorreram durante a história da medicina, para que no século XXI, a tecnologia permitisse que as imagens médicas pudessem ser utilizadas com os recursos que são dispostos. É possível dizer que a descoberta do raio X no século XIX iniciou uma história que chegou até hoje com constantes evoluções das serão analisadas. 
+
+\begin{quote}
+``No dia 8 de novembro de 1895, Wilhelm Conrad Rõntgen, então professor de física na Universidade de Würzburg, Bavária, Alemanha, descobre uma nova espécie de radiação produzida pela passagem de uma corrente elétrica por um tubo de vidro sob vácuo, e que possuia a singular qualidade de, embora invisível a olho nu, produzir fluorescência ao incidir sobre um papel impregnado por cianureto de bário e platina. Mais impressionante era a capacidade destes raios de atravessar corpos sólidos (madeira, papel, partes do corpo humano), com maior ou menor intensidade, dependendo da natureza do material'' \cite{ARRUDA, 1996, p. 1}.
+\end{quote}
+´
+
+Após o descobrimento da Radiologia, pode-se visualizar que a Radioatividade estava para ganhar seu espaço no mundo. Em 1896 estudos sobre ela ganharam vida após a descoberta que mudaria a história, estudo este atribuído às descobertas feitas por Henri Becquerel, mas que na verdade, a principal contribuição foi de Marie Curie com a descoberta dos materiais radioativos que conhecemos hoje: tório, rádio polônio, em 1898. Esta contribuição foi dada como um prefácio ao Beckerell, pois a descoberta da radiação do urânio seria "natural" para encontrar outros elementos que emitam o mesmo tipo de radiação. (MARTINS, 2003)
+
+%%CITAÇÃO AQUI
+
+Com estas descobertas mesmo sendo perigosa se não usada da maneira adequada, a radioatividade tomou um lugar essencial na medicina, pois doenças puderam ser diagnosticas com mais eficiência e rapidez. Em alguns casos até mesmo tratamentos que poderiam ser impossíveis se tornaram possíveis. (CARVALHO, 2015)
+
+Desse modo a medicina ganhava um novo aspecto se tornando mais confiável e cada vez mais evoluindo seus métodos. Pode-se notar isso também com o uso da Radiologia, que com o passar dos anos também foi tomando forma no meio hospitalar.
+
+As imagens analógicas por anos desempenharam um papel importante na sociedade, mas como não só a medicina tomou este rumo evolutivo, assim outras tecnologias também surgiram, tornando o mundo cada vez mais globalizado. Isso faz com que algumas tecnologias se tornem “ultrapassadas” não sendo mais tão eficientes como antes. E com isso surgem as imagens médicas digitais (FILHO; XAVIER; ADRIANO, 2001)
+
+Dessa forma a evolução tecnológica do radiodiagnóstico tomou um rumo interessante, onde atualmente com o uso da tecnologia da informação, diversos hospitais adotam medidas que facilitam o trabalho e minimizam custos administrativo, mas para isso deve-se entender que estes métodos possuem os chamados protocolos, que são essenciais no funcionamento dessas ferramentas tecnológicas (FILHO; XAVIER; ADRIANO, 2001).
+
+% ---
+\section{Protocolos}
+% ---
+Protocolos são meios de comunicação que transmitem informações bem definidas para execução de tarefas. São usados por diversos computadores em uma rede, fazendo assim com que todos possam usar os mesmos protocolos para que a comunicação ocorra de forma eficaz. (RIOS, 2012)
+
+\subsection{DICOM}
+
+\subsection{PACS}
+
+% ---
+\section{Séries Temporais}
+% ---
+
+\subsection{Tendência}
+\subsection{Estacionariedade}
+\subsection{Autocorrelação}
+
+% ---
+\section{Modelos Matemáticos}
+% ---
+
+\subsection{Modelo de Poisson}
+\subsection{Modelo de Pareto}
+\subsection{Modelo Autorregressivo}
+\subsection{Modelo Média Móvel}
+\subsection{Modelo ARIMA}
+\subsection{Modelo SARIMA}
+
+% ---
+\section{Algoritmos e Automação}
+% ---
+
+\subsection{Definições}
+\subsection{Python}
+
+
+
+% ----------------------------------------------------------
+% PARTE
+% ----------------------------------------------------------
+\part{Resultados}
+% ----------------------------------------------------------
+
+% ---
+% primeiro capitulo de Resultados
+% ---
+\chapter{Lectus lobortis condimentum}
+% ---
+
+% ---
+\section{Vestibulum ante ipsum primis in faucibus orci luctus et ultrices
+posuere cubilia Curae}
+% ---
+
+\lipsum[21-22]
+
+% ---
+% segundo capitulo de Resultados
+% ---
+\chapter{Nam sed tellus sit amet lectus urna ullamcorper tristique interdum
+elementum}
+% ---
+
+% ---
+\section{Pellentesque sit amet pede ac sem eleifend consectetuer}
+% ---
+
+\lipsum[24]
+
+% ----------------------------------------------------------
+% Finaliza a parte no bookmark do PDF
+% para que se inicie o bookmark na raiz
+% e adiciona espaço de parte no Sumário
+% ----------------------------------------------------------
+%\phantompart
+
+% ---
+% Conclusão (outro exemplo de capítulo sem numeração e presente no sumário)
+% ---
+\chapter*[Conclusão]{Conclusão}
+\addcontentsline{toc}{chapter}{Conclusão}
+% ---
+
+\lipsum[31-33]
+
+% ----------------------------------------------------------
+% ELEMENTOS PÓS-TEXTUAIS
+% ----------------------------------------------------------
+\postextual
+% ----------------------------------------------------------
+
+% ----------------------------------------------------------
+% Referências bibliográficas
+% ----------------------------------------------------------
+\bibliography{abntex2-modelo-references}
+
+% ----------------------------------------------------------
+% Glossário
+% ----------------------------------------------------------
+%
+% Consulte o manual da classe abntex2 para orientações sobre o glossário.
+%
+%\glossary
+
+% ----------------------------------------------------------
+% Apêndices
+% ----------------------------------------------------------
+
+% ---
+% Inicia os apêndices
+% ---
+\begin{apendicesenv}
+
+% Imprime uma página indicando o início dos apêndices
+\partapendices
+
+% ----------------------------------------------------------
+\chapter{Quisque libero justo}
+% ----------------------------------------------------------
+
+\lipsum[50]
+
+% ----------------------------------------------------------
+\chapter{Nullam elementum urna vel imperdiet sodales elit ipsum pharetra ligula
+ac pretium ante justo a nulla curabitur tristique arcu eu metus}
+% ----------------------------------------------------------
+\lipsum[55-57]
+
+\end{apendicesenv}
+% ---
+
+
+% ----------------------------------------------------------
+% Anexos
+% ----------------------------------------------------------
+
+% ---
+% Inicia os anexos
+% ---
+\begin{anexosenv}
+
+% Imprime uma página indicando o início dos anexos
+\partanexos
+
+% ---
+\chapter{Morbi ultrices rutrum lorem.}
+% ---
+\lipsum[30]
+
+% ---
+\chapter{Cras non urna sed feugiat cum sociis natoque penatibus et magnis dis
+parturient montes nascetur ridiculus mus}
+% ---
+
+\lipsum[31]
+
+% ---
+\chapter{Fusce facilisis lacinia dui}
+% ---
+
+\lipsum[32]
+
+\end{anexosenv}
+
+%---------------------------------------------------------------------
+% INDICE REMISSIVO
+%---------------------------------------------------------------------
+%\phantompart
+\printindex
+%---------------------------------------------------------------------
+
+\end{document}
